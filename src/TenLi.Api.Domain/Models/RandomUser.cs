@@ -17,7 +17,9 @@ namespace TenLi.Api.Domain.Models
 		{
 			get
 			{
-				return Firstname.EngValue + "@TenliDomain.co.il";
+				var firstnameValue = (Firstname != null && !string.IsNullOrEmpty(Firstname.EngValue)) ? Firstname.EngValue : "firstname";
+				var lastnameValue = (Lastname != null && !string.IsNullOrEmpty(Lastname.EngValue)) ? Lastname.EngValue : "lastname";
+				return firstnameValue + "." + lastnameValue + "@ExampleDomain.co.il";
 			}
 		}
 	}
