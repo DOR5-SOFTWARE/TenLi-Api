@@ -15,6 +15,7 @@ namespace TenLi.Api.Web
 			var host = new WebHostBuilder()
 				.UseKestrel()
 				.UseContentRoot(Directory.GetCurrentDirectory())
+				.UseUrls("http://localhost:60000")
 				.UseIISIntegration()
 				.UseStartup<Startup>()
 				.Build();

@@ -1,19 +1,22 @@
 {
-	"dependencies": {
-		"Microsoft.NETCore.App": {
-			"version": "1.0.0-*"
-		},
-		"Microsoft.AspNetCore.Mvc": "1.0.0-rc2-final",
-		"Microsoft.AspNetCore.Server.IISIntegration": "1.0.0-rc2-final",
-		"Microsoft.AspNetCore.Server.Kestrel": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Configuration.FileExtensions": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Logging": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Logging.Console": "1.0.0-rc2-final",
-		"Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-final",
-		"TenLi.Api.Domain": "1.0.0-*"
-	},
+  "dependencies": {
+    "Microsoft.NETCore.App": {
+      "version": "1.0.0-*"
+    },
+    "TenLi.Api.Domain": "1.0.0-*",
+    "Microsoft.AspNetCore.Mvc": "1.0.0",
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0",
+    "Microsoft.Extensions.Logging": "1.0.0",
+    "Microsoft.Extensions.Logging.Console": "1.0.0",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0",
+    "Newtonsoft.Json": "9.0.1",
+    "Swashbuckle.SwaggerGen": "6.0.0-beta901",
+    "Swashbuckle.SwaggerUi": "6.0.0-beta901"
+  },
 
 	"tools": {
 		"Microsoft.AspNetCore.Server.IISIntegration.Tools": {
@@ -34,7 +37,8 @@
 
 	"buildOptions": {
 		"emitEntryPoint": true,
-		"preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "xmlDoc": true
 	},
 
 	"runtimeOptions": {
