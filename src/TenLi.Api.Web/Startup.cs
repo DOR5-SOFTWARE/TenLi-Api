@@ -9,6 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.Swagger.Model;
 using System.IO;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using TenLi.Api.Domain.Services;
+using Microsoft.Extensions.Caching.Memory;
+using TenLi.Api.Domain.Repositories.RandomUserProperties;
 
 namespace TenLi.Api.Web
 {
@@ -32,7 +37,20 @@ namespace TenLi.Api.Web
 		{
 			var pathToDoc = Configuration["Swagger:Path"];
 
-			services.AddMvc();
+			services.AddMvc().AddJsonOptions(opt =>
+			{
+				var resolver = opt.SerializerSettings.ContractResolver;
+
+				if (resolver != null)
+				{
+					var res = resolver as DefaultContractResolver;
+					res.NamingStrategy = null;
+				}
+
+				opt.SerializerSettings.Formatting = Formatting.Indented;
+			});
+
+			services.AddMemoryCache();
 
 			services.AddSwaggerGen();
 			services.ConfigureSwaggerGen(options =>
@@ -47,6 +65,12 @@ namespace TenLi.Api.Web
 				//options.IncludeXmlComments(pathToDoc);
 				options.DescribeAllEnumsAsStrings();
 			});
+
+			services.AddSingleton<IFirstnamesRepository, FirstnamesRepository>();
+			services.AddSingleton<ILastnamesRepository, LastnamesRepository>();
+			services.AddSingleton<IImagesRepository, ImagesRepository>();
+
+			services.AddSingleton<IRandomUsersGenerator, RandomUsersGenerator>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

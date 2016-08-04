@@ -11,13 +11,19 @@ namespace TenLi.Api.Web.Controllers
 	[Route("api/V1/[controller]/[action]")]
 	public class RandomUsersController : Controller
 	{
+		private readonly IRandomUsersGenerator _randomUsersGenerator;
+
+		public RandomUsersController(IRandomUsersGenerator randomUsersGenerator)
+		{
+			_randomUsersGenerator = randomUsersGenerator;
+		}
+
 		[HttpGet]
 		public RandomUser GetRandomUser()
 		{
 			try
 			{
-				var randomUsersGenerator = new RandomUsersGenerator();
-				return randomUsersGenerator.GenerateRandomUser();
+				return _randomUsersGenerator.GenerateRandomUser();
 			}
 			catch (Exception ex)
 			{

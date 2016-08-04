@@ -10,8 +10,9 @@ namespace TenLi.Api.Domain.Models
 	{
 		public Firstname Firstname { get; set; }
 		public Lastname Lastname { get; set; }
-		public Gender Gender { get; set; }
 		public Image Image { get; set; }
+
+		public Gender Gender { get; set; }		
 
 		public string Email
 		{
