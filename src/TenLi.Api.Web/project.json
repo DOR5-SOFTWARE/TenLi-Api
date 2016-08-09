@@ -16,7 +16,8 @@
 		"Microsoft.Extensions.Logging.Debug": "1.0.0",
 		"Newtonsoft.Json": "9.0.1",
 		"Swashbuckle.SwaggerGen": "6.0.0-beta901",
-		"Swashbuckle.SwaggerUi": "6.0.0-beta901"
+			"Swashbuckle.SwaggerUi": "6.0.0-beta901",
+			"TenLi.Api.DataAccess": "1.0.0-*"
 	},
 
 	"tools": {
@@ -31,6 +32,7 @@
 			"imports": [
 				"dotnet5.6",
 				"dnxcore50",
+				"dnx451",
 				"portable-net45+win8"
 			]
 		}
@@ -38,8 +40,8 @@
 
 	"buildOptions": {
 		"emitEntryPoint": true,
-    "preserveCompilationContext": true,
-    "xmlDoc": true
+		"preserveCompilationContext": true,
+		"xmlDoc": true
 	},
 
 	"runtimeOptions": {
@@ -47,9 +49,9 @@
 	},
 
 	"runtimes": {
-		"ubuntu.14.04-x64": { },
-		"win8-x64": { },
-		"win10-x64": { }
+		"ubuntu.14.04-x64": {},
+		"win8-x64": {},
+		"win10-x64": {}
 	},
 
 	"publishOptions": {

@@ -2537,28 +2537,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
-      },
-      "TenLi.Api.DataAccess/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v1.0",
-        "dependencies": {
-          "Microsoft.Extensions.Caching.Memory": "1.0.0",
-          "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
-          "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
-          "Microsoft.Extensions.Configuration.Json": "1.0.0",
-          "Microsoft.Extensions.Logging": "1.0.0",
-          "Microsoft.Extensions.Logging.Console": "1.0.0",
-          "Microsoft.Extensions.Logging.Debug": "1.0.0",
-          "Microsoft.NETCore.App": "1.0.0",
-          "Newtonsoft.Json": "9.0.1",
-          "mongocsharpdriver": "2.2.4"
-        },
-        "compile": {
-          "netcoreapp1.0/TenLi.Api.DataAccess.dll": {}
-        },
-        "runtime": {
-          "netcoreapp1.0/TenLi.Api.DataAccess.dll": {}
-        }
       }
     },
     ".NETCoreApp,Version=v1.0/ubuntu.14.04-x64": {
@@ -5342,28 +5320,6 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
-      },
-      "TenLi.Api.DataAccess/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v1.0",
-        "dependencies": {
-          "Microsoft.Extensions.Caching.Memory": "1.0.0",
-          "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
-          "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
-          "Microsoft.Extensions.Configuration.Json": "1.0.0",
-          "Microsoft.Extensions.Logging": "1.0.0",
-          "Microsoft.Extensions.Logging.Console": "1.0.0",
-          "Microsoft.Extensions.Logging.Debug": "1.0.0",
-          "Microsoft.NETCore.App": "1.0.0",
-          "Newtonsoft.Json": "9.0.1",
-          "mongocsharpdriver": "2.2.4"
-        },
-        "compile": {
-          "netcoreapp1.0/TenLi.Api.DataAccess.dll": {}
-        },
-        "runtime": {
-          "netcoreapp1.0/TenLi.Api.DataAccess.dll": {}
-        }
       }
     },
     ".NETCoreApp,Version=v1.0/win10-x64": {
@@ -8102,28 +8058,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
-        }
-      },
-      "TenLi.Api.DataAccess/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v1.0",
-        "dependencies": {
-          "Microsoft.Extensions.Caching.Memory": "1.0.0",
-          "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
-          "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
-          "Microsoft.Extensions.Configuration.Json": "1.0.0",
-          "Microsoft.Extensions.Logging": "1.0.0",
-          "Microsoft.Extensions.Logging.Console": "1.0.0",
-          "Microsoft.Extensions.Logging.Debug": "1.0.0",
-          "Microsoft.NETCore.App": "1.0.0",
-          "Newtonsoft.Json": "9.0.1",
-          "mongocsharpdriver": "2.2.4"
-        },
-        "compile": {
-          "netcoreapp1.0/TenLi.Api.DataAccess.dll": {}
-        },
-        "runtime": {
-          "netcoreapp1.0/TenLi.Api.DataAccess.dll": {}
         }
       }
     },
@@ -10898,28 +10832,6 @@
         },
         "runtime": {
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
-        }
-      },
-      "TenLi.Api.DataAccess/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v1.0",
-        "dependencies": {
-          "Microsoft.Extensions.Caching.Memory": "1.0.0",
-          "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.0.0",
-          "Microsoft.Extensions.Configuration.FileExtensions": "1.0.0",
-          "Microsoft.Extensions.Configuration.Json": "1.0.0",
-          "Microsoft.Extensions.Logging": "1.0.0",
-          "Microsoft.Extensions.Logging.Console": "1.0.0",
-          "Microsoft.Extensions.Logging.Debug": "1.0.0",
-          "Microsoft.NETCore.App": "1.0.0",
-          "Newtonsoft.Json": "9.0.1",
-          "mongocsharpdriver": "2.2.4"
-        },
-        "compile": {
-          "netcoreapp1.0/TenLi.Api.DataAccess.dll": {}
-        },
-        "runtime": {
-          "netcoreapp1.0/TenLi.Api.DataAccess.dll": {}
         }
       }
     }
@@ -16782,11 +16694,6 @@
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._"
       ]
-    },
-    "TenLi.Api.DataAccess/1.0.0": {
-      "type": "project",
-      "path": "../TenLi.Api.DataAccess/project.json",
-      "msbuildProject": "../TenLi.Api.DataAccess/TenLi.Api.DataAccess.xproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -16800,7 +16707,7 @@
       "Microsoft.Extensions.Logging.Debug >= 1.0.0",
       "Microsoft.NETCore.App >= 1.0.0-*",
       "Newtonsoft.Json >= 9.0.1",
-      "TenLi.Api.DataAccess >= 1.0.0-*"
+      "mongocsharpdriver >= 2.2.4"
     ],
     ".NETCoreApp,Version=v1.0": []
   },

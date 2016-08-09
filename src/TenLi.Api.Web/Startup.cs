@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using TenLi.Api.Domain.Services;
 using Microsoft.Extensions.Caching.Memory;
 using TenLi.Api.Domain.Repositories.RandomUserProperties;
+using TenLi.Api.DataAccess;
 
 namespace TenLi.Api.Web
 {
@@ -53,6 +54,7 @@ namespace TenLi.Api.Web
 			services.AddMemoryCache();
 
 			services.AddSwaggerGen();
+
 			services.ConfigureSwaggerGen(options =>
 			{
 				options.SingleApiVersion(new Info
@@ -65,7 +67,8 @@ namespace TenLi.Api.Web
 				//options.IncludeXmlComments(pathToDoc);
 				options.DescribeAllEnumsAsStrings();
 			});
-
+			
+			services.AddSingleton<IMongoDataAccess, MongoDataAccess>();
 			services.AddSingleton<IFirstnamesRepository, FirstnamesRepository>();
 			services.AddSingleton<ILastnamesRepository, LastnamesRepository>();
 			services.AddSingleton<IImagesRepository, ImagesRepository>();
