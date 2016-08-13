@@ -15,6 +15,8 @@ using TenLi.Api.Domain.Services;
 using Microsoft.Extensions.Caching.Memory;
 using TenLi.Api.Domain.Repositories.RandomUserProperties;
 using TenLi.Api.DataAccess;
+using TenLi.Api.DataAccess.Mongo;
+using TenLi.Api.Domain.Models.RandomUserProperties;
 
 namespace TenLi.Api.Web
 {
@@ -67,8 +69,15 @@ namespace TenLi.Api.Web
 				//options.IncludeXmlComments(pathToDoc);
 				options.DescribeAllEnumsAsStrings();
 			});
-			
-			services.AddSingleton<IMongoDataAccess, MongoDataAccess>();
+
+			services.AddSingleton(typeof(IConfigurationRoot), Configuration);
+
+			services.AddSingleton<IMongoDatabaseProvider, MongoDatabaseProvider>();
+
+			services.AddTransient<IMongoRepository<Firstname>, MongoRepository<Firstname>>();
+			services.AddTransient<IMongoRepository<Lastname>, MongoRepository<Lastname>>();
+			services.AddTransient<IMongoRepository<Image>, MongoRepository<Image>>();
+
 			services.AddSingleton<IFirstnamesRepository, FirstnamesRepository>();
 			services.AddSingleton<ILastnamesRepository, LastnamesRepository>();
 			services.AddSingleton<IImagesRepository, ImagesRepository>();

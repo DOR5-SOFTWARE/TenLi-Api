@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TenLi.Api.DataAccess.Mongo;
 using TenLi.Api.Domain.Models.RandomUserProperties;
 
 namespace TenLi.Api.Domain.Repositories.RandomUserProperties
@@ -18,13 +19,15 @@ namespace TenLi.Api.Domain.Repositories.RandomUserProperties
 	public class ImagesRepository : IImagesRepository
 	{
 		private readonly IMemoryCache _memoryCache;
+		private readonly IMongoRepository<Image> _imagesMongoRepository;
 
 		private const string MALE_IMAGES_CACHE_KEY = "MaleImages";
 		private const string FEMALE_IMAGES_CACHE_KEY = "FemaleImages";
 
-		public ImagesRepository(IMemoryCache memoryCache)
+		public ImagesRepository(IMemoryCache memoryCache, IMongoRepository<Image> imagesMongoRepository)
 		{
 			_memoryCache = memoryCache;
+			_imagesMongoRepository = imagesMongoRepository;
 		}
 
 		public List<Image> MaleImages
@@ -50,55 +53,16 @@ namespace TenLi.Api.Domain.Repositories.RandomUserProperties
 
 		private List<Image> InitializeMaleImages(ICacheEntry arg)
 		{
-			var maleImages = new Image[] {
-				new Image
-				{
-					Large = "https://s3.amazonaws.com/uifaces/faces/twitter/rem/128.jpg",
-					Medium = "https://s3.amazonaws.com/uifaces/faces/twitter/rem/73.jpg",
-					Small = "https://s3.amazonaws.com/uifaces/faces/twitter/rem/48.jpg",
-					Gender = Gender.Male
-				},
-				new Image
-				{
-					Large = "https://s3.amazonaws.com/uifaces/faces/twitter/ripplemdk/128.jpg",
-					Medium = "https://s3.amazonaws.com/uifaces/faces/twitter/ripplemdk/73.jpg",
-					Small = "https://s3.amazonaws.com/uifaces/faces/twitter/ripplemdk/48.jpg",
-					Gender = Gender.Male
-				},
+			var maleImages = _imagesMongoRepository.GetList(x => x.Gender == Gender.Male);
 
-				new Image
-				{
-					Large = "https://s3.amazonaws.com/uifaces/faces/twitter/ok/128.jpg",
-					Medium = "https://s3.amazonaws.com/uifaces/faces/twitter/ok/73.jpg",
-					Small = "https://s3.amazonaws.com/uifaces/faces/twitter/ok/48.jpg",
-					Gender = Gender.Male
-				}
-			};
-
-			return maleImages.ToList();
+			return maleImages;
 		}
 
 		private List<Image> InitializeFemaleImages(ICacheEntry arg)
 		{
-			var femaleImages = new Image[]
-			{
-				new Image
-				{
-					Large = "https://s3.amazonaws.com/uifaces/faces/twitter/jina/128.jpg",
-					Medium = "https://s3.amazonaws.com/uifaces/faces/twitter/jina/73.jpg",
-					Small = "https://s3.amazonaws.com/uifaces/faces/twitter/jina/48.jpg",
-					Gender = Gender.Female
-				},
-				new Image
-				{
-					Large = "https://s3.amazonaws.com/uifaces/faces/twitter/nuraika/128.jpg",
-					Medium = "https://s3.amazonaws.com/uifaces/faces/twitter/nuraika/73.jpg",
-					Small = "https://s3.amazonaws.com/uifaces/faces/twitter/nuraika/48.jpg",
-					Gender = Gender.Female
-				}
-			};
+			var femaleImages = _imagesMongoRepository.GetList(x => x.Gender == Gender.Female);
 
-			return femaleImages.ToList();
+			return femaleImages;
 		}
 	}
 }

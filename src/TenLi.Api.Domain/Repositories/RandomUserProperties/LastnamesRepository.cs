@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TenLi.Api.DataAccess.Mongo;
 using TenLi.Api.Domain.Models.RandomUserProperties;
 
 namespace TenLi.Api.Domain.Repositories.RandomUserProperties
@@ -16,12 +17,14 @@ namespace TenLi.Api.Domain.Repositories.RandomUserProperties
 	public class LastnamesRepository : ILastnamesRepository
 	{
 		private readonly IMemoryCache _memoryCache;
+		private readonly IMongoRepository<Lastname> _lastnamesMongoRepository;
 
 		private const string LASTNAMES_CACHE_KEY = "Lastnames";
 
-		public LastnamesRepository(IMemoryCache memoryCache)
+		public LastnamesRepository(IMemoryCache memoryCache, IMongoRepository<Lastname> lastnamesMongoRepository)
 		{
 			_memoryCache = memoryCache;
+			_lastnamesMongoRepository = lastnamesMongoRepository;
 		}
 
 		public List<Lastname> Lastnames
@@ -34,30 +37,9 @@ namespace TenLi.Api.Domain.Repositories.RandomUserProperties
 
 		private List<Lastname> InitializeLastnames(ICacheEntry arg)
 		{
-			var lastnames = new Lastname[] {
-				new Lastname
-				{
-					EngValue = "Gantman",
-					HebValue = "גנטמן"
-				},
-				new Lastname
-				{
-					EngValue = "Golan",
-					HebValue = "גולן"
-				},
-				new Lastname
-				{
-					EngValue = "Peretz",
-					HebValue = "פרץ"
-				},
-				new Lastname
-				{
-					EngValue = "Fischer",
-					HebValue = "פישר"
-				}
-			};
+			var lastnames = _lastnamesMongoRepository.GetList(x => true);
 
-			return lastnames.ToList();
+			return lastnames;
 		}
 	}
 }

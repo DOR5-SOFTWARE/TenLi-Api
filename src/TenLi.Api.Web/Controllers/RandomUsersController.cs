@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TenLi.Api.Domain.Models;
 using TenLi.Api.Domain.Services;
+using TenLi.Api.DataAccess;
 
 namespace TenLi.Api.Web.Controllers
 {

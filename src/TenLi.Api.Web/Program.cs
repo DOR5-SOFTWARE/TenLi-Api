@@ -16,7 +16,6 @@ namespace TenLi.Api.Web
 				.UseKestrel()
 				.UseContentRoot(Directory.GetCurrentDirectory())
 				.UseUrls("http://localhost:60000")
-				.UseIISIntegration()
 				.UseStartup<Startup>()
 				.Build();
 

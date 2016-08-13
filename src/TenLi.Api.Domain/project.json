@@ -12,18 +12,18 @@
 		"Microsoft.Extensions.Configuration.Json": "1.0.0",
 		"Microsoft.Extensions.Logging": "1.0.0",
 		"Microsoft.Extensions.Logging.Console": "1.0.0",
-			"Microsoft.Extensions.Logging.Debug": "1.0.0",
-			"TenLi.Api.DataAccess": "1.0.0-*"
+		"Microsoft.Extensions.Logging.Debug": "1.0.0",
+		"TenLi.Api.DataAccess": "1.0.0-*"
 	},
 
 	"frameworks": {
 		"netcoreapp1.0": {
-					"imports": [
-						"dotnet5.6",
-						"dnxcore50",
-						"dnx451",
-						"portable-net45+win8"
-					]
+			"imports": [
+				"dotnet5.6",
+				"dnxcore50",
+				"dnx451",
+				"portable-net45+win8"
+			]
 		}
 	},
 

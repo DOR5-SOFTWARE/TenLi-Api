@@ -12,7 +12,7 @@ namespace TenLi.Api.Domain.Models
 		public Lastname Lastname { get; set; }
 		public Image Image { get; set; }
 
-		public Gender Gender { get; set; }		
+		public Gender Gender { get; set; }
 
 		public string Email
 		{

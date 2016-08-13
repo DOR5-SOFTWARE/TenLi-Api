@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TenLi.Api.DataAccess.Mongo;
 using TenLi.Api.Domain.Models.RandomUserProperties;
 
 namespace TenLi.Api.Domain.Repositories.RandomUserProperties
@@ -16,12 +17,14 @@ namespace TenLi.Api.Domain.Repositories.RandomUserProperties
 	public class FirstnamesRepository : IFirstnamesRepository
 	{
 		private readonly IMemoryCache _memoryCache;
+		private readonly IMongoRepository<Firstname> _firstnamesMongoRepository;
 
 		private const string FIRSTNAMES_CACHE_KEY = "Firstnames";
 
-		public FirstnamesRepository(IMemoryCache memoryCache)
+		public FirstnamesRepository(IMemoryCache memoryCache, IMongoRepository<Firstname> firstnamesMongoRepository)
 		{
 			_memoryCache = memoryCache;
+			_firstnamesMongoRepository = firstnamesMongoRepository;
 		}
 
 		public List<Firstname> Firstnames
@@ -34,34 +37,9 @@ namespace TenLi.Api.Domain.Repositories.RandomUserProperties
 
 		private List<Firstname> InitializeFirstnames(ICacheEntry arg)
 		{
-			var firstnames = new Firstname[] {
-					new Firstname
-					{
-						EngValue = "Anton",
-						HebValue = "אנטון",
-						Gender = Gender.Male
-					},
-					new Firstname
-					{
-						EngValue = "Valeria",
-						HebValue = "ולריה",
-						Gender = Gender.Female
-					},
-					new Firstname
-					{
-						EngValue = "Eli",
-						HebValue = "עילאי",
-						Gender = Gender.Male
-					},
-					new Firstname
-					{
-						EngValue = "Eithan",
-						HebValue = "איתן",
-						Gender = Gender.Male
-					}
-			};
+			var firstnames = _firstnamesMongoRepository.GetList(x => true);
 
-			return firstnames.ToList();
+			return firstnames;
 		}
 	}
 }

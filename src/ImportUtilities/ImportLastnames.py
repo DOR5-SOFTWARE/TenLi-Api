@@ -10,7 +10,7 @@ def insert_to_mongo(dto):
 	insertedDoc = lastnamesCollection.find_one({'_id' : id})
 	return insertedDoc
 
-def transmit_csv_data_to_robomow_id():
+def import_lastnames():
 
 	with open('Lastnames4Tenli.csv', newline='', encoding='Utf-8') as csvFile:
 
@@ -29,4 +29,4 @@ def transmit_csv_data_to_robomow_id():
 				print(e)
 				continue
 
-transmit_csv_data_to_robomow_id()
+import_lastnames()
