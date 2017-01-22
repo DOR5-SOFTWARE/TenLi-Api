@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using TenLi.Api.Domain.Models.RandomUserProperties;
+﻿using TenLi.Api.Domain.Models.RandomUserProperties;
 
 namespace TenLi.Api.Domain.Models
 {
@@ -11,16 +7,25 @@ namespace TenLi.Api.Domain.Models
 		public Firstname Firstname { get; set; }
 		public Lastname Lastname { get; set; }
 		public Image Image { get; set; }
-
 		public Gender Gender { get; set; }
+		public Profession Profession { get; set; }
+
+		public Address Address { get; set; }
+
+		public string Username {
+			get
+			{
+				var firstnameValue = Firstname.IsNullOrEmpty(false, true) ? "firstname" : Firstname.EngValue;
+				var lastnameValue = Lastname.IsNullOrEmpty(false, true) ? "lastname" : Lastname.EngValue;
+				return firstnameValue + "." + lastnameValue;
+			}
+		}
 
 		public string Email
 		{
 			get
 			{
-				var firstnameValue = (Firstname != null && !string.IsNullOrEmpty(Firstname.EngValue)) ? Firstname.EngValue : "firstname";
-				var lastnameValue = (Lastname != null && !string.IsNullOrEmpty(Lastname.EngValue)) ? Lastname.EngValue : "lastname";
-				return firstnameValue + "." + lastnameValue + "@ExampleDomain.co.il";
+				return Username + "@ExampleDomain.co.il";
 			}
 		}
 	}

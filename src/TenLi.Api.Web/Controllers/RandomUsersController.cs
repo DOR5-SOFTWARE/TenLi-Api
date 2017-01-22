@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TenLi.Api.Domain.Models;
+using TenLi.Api.Domain.Models.RandomUserProperties;
 using TenLi.Api.Domain.Services;
-using TenLi.Api.DataAccess;
 
 namespace TenLi.Api.Web.Controllers
 {
@@ -20,11 +20,11 @@ namespace TenLi.Api.Web.Controllers
 		}
 
 		[HttpGet]
-		public RandomUser GetRandomUser()
+		public RandomUser GetRandomUser([FromQuery] Gender gender = Gender.Any)
 		{
 			try
 			{
-				return _randomUsersGenerator.GenerateRandomUser();
+				return _randomUsersGenerator.GenerateRandomUser(gender);
 			}
 			catch (Exception ex)
 			{

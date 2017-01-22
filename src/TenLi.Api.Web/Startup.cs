@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.Swagger.Model;
-using System.IO;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using TenLi.Api.Domain.Services;
-using Microsoft.Extensions.Caching.Memory;
-using TenLi.Api.Domain.Repositories.RandomUserProperties;
-using TenLi.Api.DataAccess;
+using TenLi.Api.Domain.Repositories;
 using TenLi.Api.DataAccess.Mongo;
 using TenLi.Api.Domain.Models.RandomUserProperties;
 
@@ -40,18 +33,15 @@ namespace TenLi.Api.Web
 		{
 			var pathToDoc = Configuration["Swagger:Path"];
 
-			services.AddMvc().AddJsonOptions(opt =>
-			{
-				var resolver = opt.SerializerSettings.ContractResolver;
-
-				if (resolver != null)
+			services.AddMvc()
+				.AddJsonOptions(opt =>
 				{
-					var res = resolver as DefaultContractResolver;
-					res.NamingStrategy = null;
-				}
+					opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 
-				opt.SerializerSettings.Formatting = Formatting.Indented;
-			});
+					var resolver = opt.SerializerSettings.ContractResolver;
+
+					opt.SerializerSettings.Formatting = Formatting.Indented;
+				});
 
 			services.AddMemoryCache();
 
@@ -77,11 +67,18 @@ namespace TenLi.Api.Web
 			services.AddTransient<IMongoRepository<Firstname>, MongoRepository<Firstname>>();
 			services.AddTransient<IMongoRepository<Lastname>, MongoRepository<Lastname>>();
 			services.AddTransient<IMongoRepository<Image>, MongoRepository<Image>>();
+			services.AddTransient<IMongoRepository<Street>, MongoRepository<Street>>();
+			services.AddTransient<IMongoRepository<City>, MongoRepository<City>>();
+			services.AddTransient<IMongoRepository<Profession>, MongoRepository<Profession>>();			
 
-			services.AddSingleton<IFirstnamesRepository, FirstnamesRepository>();
-			services.AddSingleton<ILastnamesRepository, LastnamesRepository>();
-			services.AddSingleton<IImagesRepository, ImagesRepository>();
+			services.AddSingleton<ICachedDataRepository<Firstname>, CachedDataRepository<Firstname>>();
+			services.AddSingleton<ICachedDataRepository<Lastname>, CachedDataRepository<Lastname>>();
+			services.AddSingleton<ICachedDataRepository<Image>, CachedDataRepository<Image>>();
+			services.AddSingleton<ICachedDataRepository<Street>, CachedDataRepository<Street>>();
+			services.AddSingleton<ICachedDataRepository<City>, CachedDataRepository<City>>();
+			services.AddSingleton<ICachedDataRepository<Profession>, CachedDataRepository<Profession>>();
 
+			services.AddSingleton<IRandomAddressGenerator, RandomAddressGenerator>();
 			services.AddSingleton<IRandomUsersGenerator, RandomUsersGenerator>();
 		}
 
