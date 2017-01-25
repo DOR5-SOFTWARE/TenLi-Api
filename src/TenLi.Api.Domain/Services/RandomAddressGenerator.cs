@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using TenLi.Api.Domain.Models.RandomUserProperties;
+using TenLi.Api.Domain.Repositories;
 
 namespace TenLi.Api.Domain.Services
 {
@@ -8,19 +10,20 @@ namespace TenLi.Api.Domain.Services
     }
     public class RandomAddressGenerator : IRandomAddressGenerator
     {
+        private readonly ICachedDataRepository<Address> _addresses;
+        private readonly Random _random;
+
+        public RandomAddressGenerator(ICachedDataRepository<Address> addressesRepository){
+            _addresses = addressesRepository;
+            _random = new Random();
+        }
+
         public Address GenerateRandomAddress()
         {
-            return new Address{
-                City = new City{
-                    HebValue = "תל אביב",
-                    EngValue = "Tel Aviv"
-                },
-                Street = new Street{
-                    HebValue = "אבן גבירול",
-                    EngValue = "Even Gvirol"
-                },
-                HouseNumber = 50
-            };
+            var address = _addresses[_random.Next(0, _addresses.Count())];
+            address.HouseNumber = _random.Next(5, 40);
+
+            return address;
         }
     }
 }

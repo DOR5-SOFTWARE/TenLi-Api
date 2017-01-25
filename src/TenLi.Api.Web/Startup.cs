@@ -53,7 +53,7 @@ namespace TenLi.Api.Web
 				{
 					Version = "v1",
 					Title = "Get Random Hebrew User",
-					Description = "A simple api to get random users with Hebrew names",
+					Description = "A simple api to get random users with Hebrew properties",
 					TermsOfService = "None"
 				});
 				//options.IncludeXmlComments(pathToDoc);
@@ -67,15 +67,13 @@ namespace TenLi.Api.Web
 			services.AddTransient<IMongoRepository<Firstname>, MongoRepository<Firstname>>();
 			services.AddTransient<IMongoRepository<Lastname>, MongoRepository<Lastname>>();
 			services.AddTransient<IMongoRepository<Image>, MongoRepository<Image>>();
-			services.AddTransient<IMongoRepository<Street>, MongoRepository<Street>>();
-			services.AddTransient<IMongoRepository<City>, MongoRepository<City>>();
+			services.AddTransient<IMongoRepository<Address>, MongoRepository<Address>>();
 			services.AddTransient<IMongoRepository<Profession>, MongoRepository<Profession>>();			
 
 			services.AddSingleton<ICachedDataRepository<Firstname>, CachedDataRepository<Firstname>>();
 			services.AddSingleton<ICachedDataRepository<Lastname>, CachedDataRepository<Lastname>>();
 			services.AddSingleton<ICachedDataRepository<Image>, CachedDataRepository<Image>>();
-			services.AddSingleton<ICachedDataRepository<Street>, CachedDataRepository<Street>>();
-			services.AddSingleton<ICachedDataRepository<City>, CachedDataRepository<City>>();
+			services.AddSingleton<ICachedDataRepository<Address>, CachedDataRepository<Address>>();
 			services.AddSingleton<ICachedDataRepository<Profession>, CachedDataRepository<Profession>>();
 
 			services.AddSingleton<IRandomAddressGenerator, RandomAddressGenerator>();

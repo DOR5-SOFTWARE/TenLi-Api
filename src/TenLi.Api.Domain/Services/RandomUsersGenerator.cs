@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TenLi.Api.Domain.Models;
 using TenLi.Api.Domain.Models.RandomUserProperties;
 using TenLi.Api.Domain.Repositories;
+using System.Text;
 
 namespace TenLi.Api.Domain.Services
 {
@@ -67,6 +68,8 @@ namespace TenLi.Api.Domain.Services
 			
 			var address = _randomAddressGenerator.GenerateRandomAddress();
 
+			var phoneNumber = GenerateRandomPhoneNumber();
+
 			return new RandomUser
 			{
 				Firstname = firstName,
@@ -74,8 +77,23 @@ namespace TenLi.Api.Domain.Services
 				Image = image,
 				Gender = firstName.Gender,
 				Profession = profession,
-				Address = address
+				Address = address,
+				PhoneNumber = phoneNumber
 			};
 		}
-	}
+
+        private string GenerateRandomPhoneNumber()
+        {
+            var phoneStringBuilder = new StringBuilder();
+
+			phoneStringBuilder.Append("05");
+			phoneStringBuilder.Append(_random.Next(2,7));
+			
+			while(phoneStringBuilder.Length < 10){
+				phoneStringBuilder.Append(_random.Next(0,9));
+			}
+			
+			return phoneStringBuilder.ToString();
+        }
+    }
 }

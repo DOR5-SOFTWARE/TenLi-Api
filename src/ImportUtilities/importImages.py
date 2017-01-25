@@ -1,3 +1,5 @@
+# -*- encoding: UTF-8 -*-
+
 import csv
 import json
 import random
@@ -16,6 +18,9 @@ imagesCollection = db.Images
 
 
 def insert_to_mongo(dto):
+    
+    return dto
+
     id = imagesCollection.replace_one(dto, dto, True).upserted_id
     insertedDoc = imagesCollection.find_one({'_id': id})
     print('inserted to mongo')
@@ -48,13 +53,13 @@ def download_image(image_url, username, size):
 
 
 def import_images_from_uifaces():
-    with open('FemaleUsernames.csv', newline='', encoding='Latin-1') as csvFile:
+    with open('FemaleUsernames.csv', 'r') as csvFile:
 
         reader = csv.DictReader(csvFile, delimiter='\t')
 
         for row in reader:
             try:
-                username = row['Username']
+                username = row['Username'].strip()
                 response = json.loads(get_images_urls(username))
 
                 imageDto = {

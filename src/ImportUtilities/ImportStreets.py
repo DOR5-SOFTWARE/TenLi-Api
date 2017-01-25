@@ -1,36 +1,38 @@
-import docstring
+# -*- encoding: UTF-8 -*-
+
+import codecs
 import csv
 import json
 import re
 import pymongo
-
 from pymongo import MongoClient
 
 mongoClient = MongoClient('localhost', 27017)
 db = mongoClient.tenli
-streetsCollection = db.streets
-
+addressesCollection = db.Addresses
 
 def insert_to_mongo(dto):
-    id = streetsCollection.insert_one(dto).inserted_id
-    insertedDoc = streetsCollection.find_one({'_id': id})
-    return insertedDoc
 
+    return dto
+
+    id = addressesCollection.insert_one(dto).inserted_id
+    insertedDoc = addressesCollection.find_one({'_id': id})
+    return insertedDoc
 
 def import_streets():
 
-    with open('Streets.csv', encoding='Utf-8') as csvFile:
+    with open('Streets.csv', 'r') as csvFile:
 
         reader = csv.DictReader(csvFile, delimiter=',')
 
         for row in reader:
             try:
-                streetDto = {
-                    'StreetName': row['street_name'],
-                    'CityName': row['city_name']
+                addressDto = {
+                    'City': row['city_name'].decode('utf8').strip(),
+                    'Street': row['street_name'].decode('utf8').strip()
                 }
-                print (streetDto)
-                #print(insert_to_mongo(firstnameDto))
+
+                print(insert_to_mongo(addressDto))
 
             except Exception as e:
                 print(e)
