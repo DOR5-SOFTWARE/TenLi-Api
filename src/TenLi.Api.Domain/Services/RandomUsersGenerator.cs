@@ -1,8 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using TenLi.Api.Domain.Models;
 using TenLi.Api.Domain.Models.RandomUserProperties;
 using TenLi.Api.Domain.Repositories;
@@ -26,8 +23,8 @@ namespace TenLi.Api.Domain.Services
 		private readonly Random _random;
 
 		public RandomUsersGenerator(
-			ICachedDataRepository<Firstname> firstnamesRepository, 
-			ICachedDataRepository<Lastname> lastnamesRepository, 
+			ICachedDataRepository<Firstname> firstnamesRepository,
+			ICachedDataRepository<Lastname> lastnamesRepository,
 			ICachedDataRepository<Image> imagesRepository,
 			ICachedDataRepository<Profession> professionsRepository,
 			IRandomAddressGenerator randomAddressGenerator
@@ -45,19 +42,20 @@ namespace TenLi.Api.Domain.Services
 		public RandomUser GenerateRandomUser(Gender gender)
 		{
 			Func<Firstname, bool> filterFirstnamesByGender = (Firstname f) => (gender == Gender.Any ? true : f.Gender == gender);
-			var filteredFirstnames = _firstnames.Where(filterFirstnamesByGender).ToList();			
+			var filteredFirstnames = _firstnames.Where(filterFirstnamesByGender).ToList();
 			var firstName = filteredFirstnames.ElementAt(_random.Next(0, filteredFirstnames.Count()));
 
 			var lastName = _lastnames[_random.Next(0, _lastnames.Count())];
 
 			var filteredImages = _images.Where(f => f.Gender == firstName.Gender);
 			var image = filteredImages.ElementAt(_random.Next(0, filteredImages.Count()));
-			
-			var profession = new Profession{
+
+			var profession = new Profession
+			{
 				HebValue = "מנהל פרוייקט",
 				EngValue = "Project Manager"
 			};
-			
+
 			var address = _randomAddressGenerator.GenerateRandomAddress();
 
 			var phoneNumber = GenerateRandomPhoneNumber();
@@ -74,18 +72,19 @@ namespace TenLi.Api.Domain.Services
 			};
 		}
 
-        private string GenerateRandomPhoneNumber()
-        {
-            var phoneStringBuilder = new StringBuilder();
+		private string GenerateRandomPhoneNumber()
+		{
+			var phoneStringBuilder = new StringBuilder();
 
 			phoneStringBuilder.Append("05");
-			phoneStringBuilder.Append(_random.Next(2,7));
-			
-			while(phoneStringBuilder.Length < 10){
-				phoneStringBuilder.Append(_random.Next(0,9));
+			phoneStringBuilder.Append(_random.Next(2, 7));
+
+			while (phoneStringBuilder.Length < 10)
+			{
+				phoneStringBuilder.Append(_random.Next(0, 9));
 			}
-			
+
 			return phoneStringBuilder.ToString();
-        }
-    }
+		}
+	}
 }
