@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TenLi.Api.Domain.Models;
 using TenLi.Api.Domain.Models.RandomUserProperties;
@@ -9,7 +6,7 @@ using TenLi.Api.Domain.Services;
 
 namespace TenLi.Api.Web.Controllers
 {
-	[Route("api/V1/[controller]/[action]")]
+    [Route("api/V1/[controller]/[action]")]
 	public class RandomUsersController : Controller
 	{
 		private readonly IRandomUsersGenerator _randomUsersGenerator;

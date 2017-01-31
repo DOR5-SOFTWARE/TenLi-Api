@@ -44,23 +44,15 @@ namespace TenLi.Api.Domain.Services
 
 		public RandomUser GenerateRandomUser(Gender gender)
 		{
-			List<Firstname> firstnames;
-			List<Image> images;
+			Func<Firstname, bool> filterFirstnamesByGender = (Firstname f) => (gender == Gender.Any ? true : f.Gender == gender);
+			var filteredFirstnames = _firstnames.Where(filterFirstnamesByGender).ToList();			
+			var firstName = filteredFirstnames.ElementAt(_random.Next(0, filteredFirstnames.Count()));
 
-			if(gender == Gender.Any){
-				firstnames = _firstnames.ToList();
-				images = _images.ToList();
-			} else{
-				firstnames = _firstnames.Where(f => f.Gender == gender).ToList();
-				images = _images.Where(f => f.Gender == gender).ToList();
-			}
-
-			var firstName = firstnames[_random.Next(0, firstnames.Count())];
 			var lastName = _lastnames[_random.Next(0, _lastnames.Count())];
-			var image = images[_random.Next(0, images.Count())];
+
+			var filteredImages = _images.Where(f => f.Gender == firstName.Gender);
+			var image = filteredImages.ElementAt(_random.Next(0, filteredImages.Count()));
 			
-			
-			//var profession = _professions[_random.Next(0, _professions.Count())];
 			var profession = new Profession{
 				HebValue = "מנהל פרוייקט",
 				EngValue = "Project Manager"
