@@ -7,7 +7,6 @@
     <PackageId>TenLi.Api.Web</PackageId>
     <RuntimeIdentifiers>ubuntu-x64;win10-x64;osx.10.12-x64</RuntimeIdentifiers>
     <RuntimeFrameworkVersion>2.0.0</RuntimeFrameworkVersion>
-    <!-- <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;dnxcore50;dnx451;portable-net45+win8</PackageTargetFallback> -->
   </PropertyGroup>
 
   <ItemGroup>

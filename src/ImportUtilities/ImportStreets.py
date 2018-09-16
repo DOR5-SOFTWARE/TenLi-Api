@@ -11,13 +11,15 @@ mongoClient = MongoClient('localhost', 27017)
 db = mongoClient.tenli
 addressesCollection = db.Addresses
 
+
 def insert_to_mongo(dto):
 
-    return dto
+    # return dto
 
     id = addressesCollection.insert_one(dto).inserted_id
     insertedDoc = addressesCollection.find_one({'_id': id})
     return insertedDoc
+
 
 def import_streets():
 
@@ -37,5 +39,6 @@ def import_streets():
             except Exception as e:
                 print(e)
                 continue
+
 
 import_streets()

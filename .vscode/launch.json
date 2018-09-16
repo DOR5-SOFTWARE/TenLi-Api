@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}/src/TenLi.Api.Web/bin/Debug/netcoreapp1.0/TenLi.Api.Web.dll",
+            "program": "${workspaceRoot}/src/TenLi.Api.Web/bin/Debug/netcoreapp2.0/TenLi.Api.Web.dll",
             "args": [],
             "cwd": "${workspaceRoot}/src/TenLi.Api.Web",
             "stopAtEntry": false,

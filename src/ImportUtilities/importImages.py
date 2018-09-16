@@ -9,7 +9,7 @@ import pymongo
 import shutil
 import os
 
-gender = "Female"
+gender = "Male"
 
 from pymongo import MongoClient
 mongoClient = MongoClient('localhost', 27017)
@@ -18,8 +18,8 @@ imagesCollection = db.Images
 
 
 def insert_to_mongo(dto):
-    
-    return dto
+
+    # return dto
 
     id = imagesCollection.replace_one(dto, dto, True).upserted_id
     insertedDoc = imagesCollection.find_one({'_id': id})
@@ -53,23 +53,23 @@ def download_image(image_url, username, size):
 
 
 def import_images_from_uifaces():
-    with open('FemaleUsernames.csv', 'r') as csvFile:
+    with open('MaleUsernames.csv', 'r') as csvFile:
 
         reader = csv.DictReader(csvFile, delimiter='\t')
 
         for row in reader:
             try:
                 username = row['Username'].strip()
-                response = json.loads(get_images_urls(username))
+                #response = json.loads(get_images_urls(username))
 
-                imageDto = {
-                    'Small': response['image_urls']['mini'],
-                    'Medium': response['image_urls']['bigger'],
-                    'Large': response['image_urls']['epic'],
-                }
+                # imageDto = {
+                #    'Small': response['image_urls']['mini'],
+                #    'Medium': response['image_urls']['bigger'],
+                #    'Large': response['image_urls']['epic'],
+                # }
 
-                for size in imageDto:
-                    download_image(imageDto[size], username, size)
+                # for size in imageDto:
+                #    download_image(imageDto[size], username, size)
 
                 localImage = {
                     'Small': "/Images/RandomUserImages/" + username + "/Small.jpg",
@@ -80,10 +80,11 @@ def import_images_from_uifaces():
 
                 insert_to_mongo(localImage)
 
-                print("download images for " + username + " complete")
+                #print("download images for " + username + " complete")
 
             except Exception as e:
                 print(e)
                 continue
+
 
 import_images_from_uifaces()

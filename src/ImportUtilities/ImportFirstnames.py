@@ -14,7 +14,7 @@ firstnamesCollection = db.Firstnames
 
 def insert_to_mongo(dto):
 
-    return dto
+    # return dto
 
     id = firstnamesCollection.insert_one(dto).inserted_id
     insertedDoc = firstnamesCollection.find_one({'_id': id})
@@ -40,5 +40,6 @@ def import_firstnames():
             except Exception as e:
                 print(e)
                 continue
+
 
 import_firstnames()
